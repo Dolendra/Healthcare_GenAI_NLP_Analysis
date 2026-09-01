@@ -131,5 +131,6 @@ Healthcare_GenAI_NLP/
    python scripts/create_validation_sample.py
    python scripts/apply_ground_truth.py
    python scripts/evaluate.py
+   python scripts/analyze_results.py
    ```
 7. Open and run the notebook for analytics and final presentation

@@ -11,6 +11,7 @@ This folder holds files produced when you run the pipeline locally.
 | Ground truth labels | `data/validation_ground_truth.json` (applied to manual_validation.csv) |
 | Quality report | `python scripts/quality_check.py` |
 | Evaluation metrics | `python scripts/evaluate.py` |
+| Analytics + charts | `python scripts/analyze_results.py` |
 | `checkpoints/` | Created automatically during batch processing |
 | `*.png` | Created by visualization cells in the notebook |
 

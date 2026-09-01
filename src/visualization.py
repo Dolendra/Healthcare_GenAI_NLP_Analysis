@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 from collections import Counter
-from typing import Iterable, List
+from pathlib import Path
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -119,4 +119,42 @@ def create_dashboard(combined_df: pd.DataFrame, results_df: pd.DataFrame, save_p
     plt.tight_layout()
     if save_path:
         fig.savefig(save_path, dpi=150, bbox_inches="tight")
+    return fig
+
+
+def create_final_charts(
+    combined_df: pd.DataFrame,
+    results_df: pd.DataFrame,
+    save_dir=None,
+) -> plt.Figure:
+    """
+    Generate the 7 recommended final charts for submission.
+
+    1. Records by Source
+    2. Topic Distribution
+    3. Sentiment by Topic
+    4. Media vs Twitter Topics
+    5. Top Drugs
+    6. Top Diseases
+    7. Top Study Names
+    """
+    topic_df = explode_topics(results_df)
+
+    fig, axes = plt.subplots(3, 3, figsize=(20, 16))
+    plot_source_distribution(combined_df, ax=axes[0, 0])
+    plot_topic_distribution(topic_df, ax=axes[0, 1])
+    plot_sentiment_by_topic(topic_df, ax=axes[0, 2])
+    plot_media_vs_twitter_topics(topic_df, ax=axes[1, 0])
+    plot_entity_frequency(results_df, "Drugs", top_n=10, ax=axes[1, 1])
+    plot_entity_frequency(results_df, "Diseases", top_n=10, ax=axes[1, 2])
+    plot_entity_frequency(results_df, "Study_Names", top_n=10, ax=axes[2, 1])
+    axes[2, 0].axis("off")
+    axes[2, 2].axis("off")
+
+    plt.tight_layout()
+    if save_dir:
+        out = Path(save_dir)
+        out.mkdir(parents=True, exist_ok=True)
+        fig.savefig(out / "final_charts_dashboard.png", dpi=150, bbox_inches="tight")
+
     return fig
