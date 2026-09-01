@@ -13,10 +13,8 @@ env/
 .ipynb_checkpoints/
 
 # Outputs (keep structure, ignore generated files)
-outputs/*.csv
-outputs/checkpoints/
-outputs/*.png
-outputs/*.json
+outputs/*
+!outputs/README.md
 
 # OS
 .DS_Store

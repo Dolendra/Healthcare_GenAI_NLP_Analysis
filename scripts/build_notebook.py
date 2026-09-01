@@ -253,23 +253,29 @@ print(build_extraction_prompt(sample_text[:500]))"""),
 
     md("""## 17. Pilot Test
 
-Process 10 records first. Review output quality before the full batch."""),
-    code("""pilot = combined_df.sample(n=min(PILOT_SAMPLE_SIZE, len(combined_df)), random_state=42)
+Deliberately selected 10 records via `select_pilot_records()`. Review output before the full batch."""),
+    code("""from src.preprocessing import select_pilot_records
+
+pilot = select_pilot_records(combined_df, n=PILOT_SAMPLE_SIZE)
 pilot_results = []
 
 for _, row in pilot.iterrows():
-    result, status = analyze_text_with_retry(client, row["Combined"])
+    row_dict = row.to_dict()
+    result, status, attempt_count, last_error = client.analyze_record_with_retry(row_dict)
     pilot_results.append({
         "Record_ID": row["Record_ID"],
         "Source": row["Source"],
-        "Text_Preview": row["Combined"][:120] + "...",
+        "NLP_Text_Type": row.get("NLP_Text_Type", ""),
+        "Context_Used": row.get("Context_Used", False),
         "Status": status,
+        "Attempt_Count": attempt_count,
         "Drugs": result.drugs if result else [],
         "Diseases": result.diseases if result else [],
         "Study_Names": result.study_names if result else [],
         "Topics": [t.topic for t in result.topics] if result else [],
         "Sentiments": [t.sentiment for t in result.topics] if result else [],
         "Evidence": [t.evidence for t in result.topics] if result else [],
+        "Model_Confidence": [t.model_confidence for t in result.topics] if result else [],
     })
 
 pilot_df = pd.DataFrame(pilot_results)

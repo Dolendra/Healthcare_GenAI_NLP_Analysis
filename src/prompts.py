@@ -52,10 +52,13 @@ Rules:
 8. If no drug is mentioned, return an empty list.
 9. If no disease is mentioned, return an empty list.
 10. If no study name is mentioned, return an empty list.
-11. Provide a short evidence snippet supporting each topic sentiment.
-12. model_confidence must be between 0 and 1 (model self-assessment, not a
+11. Only extract study/trial names explicitly named in the text. Do not infer or
+    guess related trials from drug names, diseases, treatment regimens, or other
+    contextual clues.
+12. Provide a short evidence snippet supporting each topic sentiment.
+13. model_confidence must be between 0 and 1 (model self-assessment, not a
     calibrated probability).
-13. For social media posts with ORIGINAL POST and REPLIED-TO TWEET sections,
+14. For social media posts with ORIGINAL POST and REPLIED-TO TWEET sections,
     attribute medical claims to the section where they appear. Do not attribute
     replied-to medical content to the original poster unless they repeat it.
 """.strip()

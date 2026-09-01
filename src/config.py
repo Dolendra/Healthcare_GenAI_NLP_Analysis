@@ -21,15 +21,14 @@ CHECKPOINT_DIR = OUTPUT_DIR / "checkpoints"
 STANDARDIZED_FILE = OUTPUT_DIR / "standardized_dataset.csv"
 
 # ── Gemini model ───────────────────────────────────────────────────────────
-# gemini-2.5-flash-lite unavailable for new API keys — use gemini-3.5-flash-lite
+# Primary Gemini model used for this assignment.
 GEMINI_MODEL = "gemini-3.5-flash-lite"
-GEMINI_MODEL_FALLBACK = "gemini-3.5-flash-lite"
 
 # ── Processing settings ────────────────────────────────────────────────────
 MAX_RETRIES = 3
 RETRY_BASE_DELAY = 2.0  # seconds, exponential backoff
 CHECKPOINT_INTERVAL = 10  # save every N records (100-record dataset)
-REQUEST_DELAY = 0.5  # seconds between API calls (rate-limit safety)
+REQUEST_DELAY = 4.5  # seconds — free tier ~15 req/min for gemini-3.5-flash-lite
 PILOT_SAMPLE_SIZE = 10
 VALIDATION_SAMPLE_SIZE = 50
 EXPECTED_MEDIA_ROWS = 50
