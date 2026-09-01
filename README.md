@@ -71,8 +71,8 @@ Topic-level sentiment (positive / negative / neutral) with evidence snippets and
 - Pydantic schema validation on every LLM response
 - Retry with exponential backoff (429, timeouts)
 - Checkpointing every 10 records (resume-safe)
-- Keyword baseline comparison vs Gemini
-- Manual validation template for precision/recall/F1 on 50 records
+- Keyword baseline comparison vs Gemini on a 50-record validation set
+- **Manual validation:** 50 stratified records (25 Media + 25 Twitter) were manually annotated with expected entities, topics, and topic-level sentiments in `data/validation_ground_truth.json` and used as ground truth for P/R/F1 evaluation
 
 ## Output
 
@@ -134,3 +134,20 @@ Healthcare_GenAI_NLP/
    python scripts/analyze_results.py
    ```
 7. Open and run the notebook for analytics and final presentation
+
+## Submission Deliverables
+
+| Deliverable | Location |
+|-------------|----------|
+| Jupyter notebook | `notebooks/Healthcare_GenAI_NLP_Analysis_NDST.ipynb` |
+| Predictions CSV | `outputs/predictions_NDST.csv` (submit separately if required; gitignored) |
+| Reproducible scripts | `scripts/` |
+| Documentation | `docs/` + `README.md` |
+
+**Pre-submission audit:**
+
+```bash
+python scripts/submission_audit.py
+```
+
+See [docs/SUBMISSION.md](docs/SUBMISSION.md) for the full checklist.
