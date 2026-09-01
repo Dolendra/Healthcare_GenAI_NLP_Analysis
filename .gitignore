@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Environment & secrets
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Outputs (keep structure, ignore generated files)
+outputs/*.csv
+outputs/checkpoints/
+outputs/*.png
+outputs/*.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
