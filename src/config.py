@@ -36,8 +36,9 @@ EXPECTED_MEDIA_ROWS = 50
 EXPECTED_TWITTER_ROWS = 50
 EXPECTED_COMBINED_ROWS = 100
 
-# NLP text sent to Gemini: Combined (assignment) or Contextual_Text (reply context)
-NLP_TEXT_COLUMN = "Contextual_Text"
+# Assignment-required text field vs NLP input with Twitter reply context
+ASSIGNMENT_TEXT_COLUMN = "Combined"
+NLP_CONTEXT_COLUMN = "Contextual_Text"
 
 # ── Target schema after standardization ────────────────────────────────────
 TARGET_COLUMNS = [

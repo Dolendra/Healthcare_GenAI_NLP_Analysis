@@ -8,12 +8,12 @@ from .config import VALID_SENTIMENTS, VALID_TOPICS
 
 
 class TopicSentiment(BaseModel):
-    """Single topic with its sentiment, evidence, and model confidence."""
+    """Single topic with sentiment, evidence, and model self-assessed confidence."""
 
     topic: str
     sentiment: str
     evidence: str
-    confidence: float = Field(ge=0.0, le=1.0)
+    model_confidence: float = Field(ge=0.0, le=1.0)
 
     @field_validator("topic")
     @classmethod
@@ -68,22 +68,21 @@ class FailedNLPResult(BaseModel):
 
 def validate_nlp_result(raw: dict) -> NLPResult:
     """Parse and validate a raw Gemini JSON response."""
+    # Accept legacy field name from older responses
+    for topic in raw.get("topics", []):
+        if "confidence" in topic and "model_confidence" not in topic:
+            topic["model_confidence"] = topic.pop("confidence")
     return NLPResult.model_validate(raw)
 
 
 def result_to_row_dict(result: NLPResult) -> dict:
     """Flatten NLPResult into columns suitable for a DataFrame row."""
-    topics = [t.topic for t in result.topics]
-    sentiments = [t.sentiment for t in result.topics]
-    evidence = [t.evidence for t in result.topics]
-    confidences = [t.confidence for t in result.topics]
-
     return {
         "Drugs": result.drugs,
         "Diseases": result.diseases,
         "Study_Names": result.study_names,
-        "Topics": topics,
-        "Topic_Sentiments": sentiments,
-        "Evidence": evidence,
-        "Confidence_Scores": confidences,
+        "Topics": [t.topic for t in result.topics],
+        "Topic_Sentiments": [t.sentiment for t in result.topics],
+        "Evidence": [t.evidence for t in result.topics],
+        "Model_Confidence_Scores": [t.model_confidence for t in result.topics],
     }

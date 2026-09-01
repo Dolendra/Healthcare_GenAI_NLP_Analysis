@@ -119,7 +119,7 @@ Each section maps to a notebook heading. Run cells **in order**.
 
 ## Section 17 — Pilot Test
 
-**What:** Process 10 random records, display results for manual review.  
+**What:** Process a deliberately selected 10-record pilot (CheckMate-901, USPSTF, long article, short tweet, reply-context tweet) via `select_pilot_records()`.
 **⚠️ Review before running full batch.**
 
 ---

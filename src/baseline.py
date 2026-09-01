@@ -1,4 +1,7 @@
-"""Rule-based keyword baseline for comparison against Gemini outputs."""
+"""Rule-based keyword baseline for comparison against Gemini outputs.
+
+This is a lightweight lexical baseline for benchmarking — not a clinical NLP system.
+"""
 
 from __future__ import annotations
 

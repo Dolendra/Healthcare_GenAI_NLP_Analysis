@@ -47,19 +47,19 @@ python scripts/inspect_datasets.py
 
 ## Model Selection
 
-Default: `gemini-2.5-flash-lite` (fast, cheap, good for classification)
+Default: `gemini-3.5-flash-lite` (available for new API keys; supports structured output)
 
-To switch models, edit `src/config.py`:
+Model is set in `src/config.py`:
 
 ```python
-GEMINI_MODEL = "gemini-2.5-flash"  # stronger, slightly more expensive
+GEMINI_MODEL = "gemini-3.5-flash-lite"
 ```
 
 ## Processing Large Datasets
 
 | Setting | Location | Default | Purpose |
 |---------|----------|---------|---------|
-| `CHECKPOINT_INTERVAL` | `src/config.py` | 50 | Save progress every N records |
+| `CHECKPOINT_INTERVAL` | `src/config.py` | 10 | Save progress every N records |
 | `REQUEST_DELAY` | `src/config.py` | 0.5s | Avoid rate limits |
 | `MAX_RETRIES` | `src/config.py` | 3 | Retry failed API calls |
 

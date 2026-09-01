@@ -215,6 +215,11 @@ def consolidate(media_df: pd.DataFrame, twitter_df: pd.DataFrame) -> pd.DataFram
         combined["Contextual_Text"].fillna("").str.split().str.len()
     )
 
+    from .prompts import nlp_text_type, record_uses_reply_context
+
+    combined["Context_Used"] = combined.apply(record_uses_reply_context, axis=1)
+    combined["NLP_Text_Type"] = combined.apply(nlp_text_type, axis=1)
+
     if len(media_df) == EXPECTED_MEDIA_ROWS and len(twitter_df) == EXPECTED_TWITTER_ROWS:
         if len(combined) != EXPECTED_COMBINED_ROWS:
             raise AssertionError(f"Expected {EXPECTED_COMBINED_ROWS} combined rows, got {len(combined)}")

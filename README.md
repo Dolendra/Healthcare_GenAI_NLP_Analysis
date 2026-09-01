@@ -64,15 +64,13 @@ Topic-level sentiment (positive / negative / neutral) with evidence snippets and
 
 ## Model Selection
 
-**Primary:** `gemini-2.5-flash-lite` — optimized for high-volume classification and extraction, supports structured JSON output, free tier available.
-
-**Fallback:** `gemini-2.5-flash` — stronger quality if Flash-Lite underperforms on your data.
+**Primary:** `gemini-3.5-flash-lite` — used because newer API keys cannot access `gemini-2.5-flash-lite`; supports structured JSON output.
 
 ## Validation Strategy
 
 - Pydantic schema validation on every LLM response
 - Retry with exponential backoff (429, timeouts)
-- Checkpointing every 50 records (resume-safe)
+- Checkpointing every 10 records (resume-safe)
 - Keyword baseline comparison vs Gemini
 - Manual validation template for precision/recall/F1 on 50 records
 

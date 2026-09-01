@@ -15,7 +15,7 @@ Analyze the provided healthcare article or social media post.
 
 Your tasks are:
 
-1. Extract explicitly mentioned drugs.
+1. Extract explicitly mentioned specific drugs/therapeutic agents.
 2. Extract explicitly mentioned diseases.
 3. Extract explicitly mentioned study names.
 4. Identify all applicable healthcare topics.
@@ -41,25 +41,31 @@ Rules:
 
 1. Extract only entities explicitly mentioned in the text.
 2. Never invent or infer entities.
-3. A document can contain multiple topics.
-4. Sentiment must be assigned independently for each topic.
-5. Use "Others" when the content does not fit the specified topics.
-6. If no drug is mentioned, return an empty list.
-7. If no disease is mentioned, return an empty list.
-8. If no study name is mentioned, return an empty list.
-9. Provide a short evidence snippet supporting each topic sentiment.
-10. Confidence must be between 0 and 1.
-11. For social media posts with ORIGINAL POST and REPLIED-TO TWEET sections,
+3. Extract specific named drugs/therapeutic agents only. Do NOT classify broad
+   treatment modalities (chemotherapy, radiotherapy, immunotherapy, surgery) as
+   individual drugs unless a specific agent is named.
+4. A document can contain multiple topics.
+5. Sentiment must be assigned independently for each topic.
+6. Do not assign a topic solely because a keyword appears. Classify based on
+   the meaning and context of the statement.
+7. Use "Others" when the content does not fit the specified topics.
+8. If no drug is mentioned, return an empty list.
+9. If no disease is mentioned, return an empty list.
+10. If no study name is mentioned, return an empty list.
+11. Provide a short evidence snippet supporting each topic sentiment.
+12. model_confidence must be between 0 and 1 (model self-assessment, not a
+    calibrated probability).
+13. For social media posts with ORIGINAL POST and REPLIED-TO TWEET sections,
     attribute medical claims to the section where they appear. Do not attribute
     replied-to medical content to the original poster unless they repeat it.
 """.strip()
 
 FEW_SHOT_EXAMPLES = """
 Example 1 — Media article:
-Text: "The KEYNOTE-189 trial demonstrated a significant improvement in overall survival with pembrolizumab plus chemotherapy in non-small cell lung cancer, although nausea and fatigue were reported more frequently."
+Text: "The KEYNOTE-189 trial demonstrated a significant improvement in overall survival with pembrolizumab in non-small cell lung cancer, although nausea and fatigue were reported more frequently."
 
 Expected:
-- drugs: ["pembrolizumab", "chemotherapy"]
+- drugs: ["pembrolizumab"]  (not "chemotherapy" — that is a treatment modality)
 - diseases: ["non-small cell lung cancer"]
 - study_names: ["KEYNOTE-189"]
 - topics: Overall Survival (OS) → positive; Safety-Side Effects → negative
@@ -87,12 +93,28 @@ def _safe_text(value: Any) -> str:
     return text
 
 
+def record_uses_reply_context(row: Mapping[str, Any]) -> bool:
+    """True when Twitter reply context is included in NLP input."""
+    if _safe_text(row.get("Source")) != "Twitter":
+        return False
+    replied_to = _safe_text(row.get("replied_to_tweet"))
+    original_post = _safe_text(row.get("Body")) or _safe_text(row.get("Combined"))
+    return bool(replied_to and replied_to not in original_post)
+
+
+def nlp_text_type(row: Mapping[str, Any]) -> str:
+    """Describe which text fields were sent to the LLM."""
+    if _safe_text(row.get("Source")) == "Twitter":
+        return "Original Post + Reply Context" if record_uses_reply_context(row) else "Original Post"
+    return "Combined"
+
+
 def build_record_text(row: Mapping[str, Any]) -> str:
     """
-    Build NLP input text from a standardized record.
+    Authoritative NLP input builder.
 
-    Media: Title + Body via Combined.
-    Twitter: labeled ORIGINAL POST + REPLIED-TO TWEET to avoid attribution errors.
+    Media: Combined (Title + Body).
+    Twitter: labelled ORIGINAL POST + REPLIED-TO TWEET when reply context exists.
     """
     source = _safe_text(row.get("Source"))
 

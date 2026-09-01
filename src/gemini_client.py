@@ -19,7 +19,6 @@ from .config import (
     CHECKPOINT_INTERVAL,
     GEMINI_MODEL,
     MAX_RETRIES,
-    NLP_TEXT_COLUMN,
     REQUEST_DELAY,
     RETRY_BASE_DELAY,
 )
@@ -28,6 +27,8 @@ from .prompts import (
     build_extraction_prompt,
     build_prompt_for_record,
     build_record_text,
+    nlp_text_type,
+    record_uses_reply_context,
 )
 from .validation import NLPResult, result_to_row_dict, validate_nlp_result
 
@@ -75,7 +76,7 @@ class GeminiClient:
         return validate_nlp_result(raw)
 
     def analyze_record(self, row: Mapping[str, Any]) -> NLPResult:
-        """Analyze one standardized record using labeled Twitter context when needed."""
+        """Analyze one standardized record using labelled Twitter context when needed."""
         prompt = build_prompt_for_record(row)
         response = self.client.models.generate_content(
             model=self.model,
@@ -94,21 +95,26 @@ class GeminiClient:
         self,
         row: Mapping[str, Any],
         max_retries: int = MAX_RETRIES,
-    ) -> tuple[NLPResult | None, str]:
-        """Analyze one record with retry. Status: success | retry_success | failed."""
+    ) -> tuple[NLPResult | None, str, int, str]:
+        """
+        Analyze one record with retry.
+
+        Returns: (result, status, attempt_count, last_error)
+        status: success | retry_success | failed
+        """
         last_error = ""
 
         for attempt in range(max_retries):
             try:
                 result = self.analyze_record(row)
                 status = "success" if attempt == 0 else "retry_success"
-                return result, status
+                return result, status, attempt + 1, ""
             except Exception as exc:
                 last_error = str(exc)
                 if attempt < max_retries - 1:
                     time.sleep(RETRY_BASE_DELAY * (2 ** attempt))
 
-        return None, f"failed: {last_error}"
+        return None, "failed", max_retries, last_error
 
 
 def get_client(api_key: Optional[str] = None) -> GeminiClient:
@@ -144,18 +150,18 @@ def analyze_text_with_retry(
     text: str,
     model: str = GEMINI_MODEL,
     max_retries: int = MAX_RETRIES,
-) -> tuple[NLPResult | None, str]:
+) -> tuple[NLPResult | None, str, int, str]:
     """Backward-compatible retry wrapper for plain text."""
     last_error = ""
     for attempt in range(max_retries):
         try:
             result = analyze_text(client, text, model=model)
             status = "success" if attempt == 0 else "retry_success"
-            return result, status
+            return result, status, attempt + 1, ""
         except Exception as exc:
             last_error = str(exc)
             time.sleep(RETRY_BASE_DELAY * (2 ** attempt))
-    return None, f"failed: {last_error}"
+    return None, "failed", max_retries, last_error
 
 
 def _save_checkpoint(results: list[dict], checkpoint_path: Path) -> None:
@@ -171,17 +177,66 @@ def _load_checkpoint(checkpoint_path: Path) -> list[dict]:
     return []
 
 
+def _build_result_record(
+    row: Mapping[str, Any],
+    result: NLPResult | None,
+    status: str,
+    attempt_count: int,
+    last_error: str,
+    model: str,
+) -> dict:
+    """Build one output row with processing metadata."""
+    row_dict = dict(row)
+    nlp_text = build_record_text(row_dict)
+
+    record = {
+        "Record_ID": row_dict.get("Record_ID"),
+        "unique_id": row_dict.get("unique_id", ""),
+        "Source": row_dict.get("Source", ""),
+        "Text_Type": row_dict.get("Text_Type", ""),
+        "Title": row_dict.get("Title", ""),
+        "Body": row_dict.get("Body", ""),
+        "Combined": row_dict.get("Combined", ""),
+        "NLP_Text": nlp_text,
+        "NLP_Text_Type": nlp_text_type(row_dict),
+        "Context_Used": record_uses_reply_context(row_dict),
+        "Model": model,
+        "Processing_Status": status,
+        "Attempt_Count": attempt_count,
+        "Last_Error": last_error,
+    }
+
+    if result is not None:
+        record.update(result_to_row_dict(result))
+    else:
+        record.update(
+            {
+                "Drugs": [],
+                "Diseases": [],
+                "Study_Names": [],
+                "Topics": [],
+                "Topic_Sentiments": [],
+                "Evidence": [],
+                "Model_Confidence_Scores": [],
+            }
+        )
+    return record
+
+
 def process_dataframe(
     df: pd.DataFrame,
     client: GeminiClient,
     model: str = GEMINI_MODEL,
-    text_column: str = NLP_TEXT_COLUMN,
     checkpoint_dir: Optional[Path] = None,
     checkpoint_interval: int = CHECKPOINT_INTERVAL,
     request_delay: float = REQUEST_DELAY,
     progress_callback: Optional[Callable[[int, int], None]] = None,
 ) -> pd.DataFrame:
-    """Batch-process records with retry, checkpointing, and labeled Twitter context."""
+    """
+    Batch-process records with retry, checkpointing, and labelled Twitter context.
+
+    NLP input is always built via build_record_text() — not a single column name.
+    """
     checkpoint_dir = checkpoint_dir or CHECKPOINT_DIR
     checkpoint_dir.mkdir(parents=True, exist_ok=True)
     master_checkpoint = checkpoint_dir / "latest_checkpoint.json"
@@ -201,40 +256,12 @@ def process_dataframe(
     for idx, (_, row) in enumerate(
         tqdm(rows_to_process.iterrows(), total=len(rows_to_process), desc="Gemini NLP")
     ):
-        record_id = row["Record_ID"]
         row_dict = row.to_dict()
-        nlp_text = build_record_text(row_dict)
+        result, status, attempt_count, last_error = client.analyze_record_with_retry(row_dict)
 
-        result, status = client.analyze_record_with_retry(row_dict)
-
-        record = {
-            "Record_ID": record_id,
-            "unique_id": row.get("unique_id", ""),
-            "Source": row.get("Source", ""),
-            "Text_Type": row.get("Text_Type", ""),
-            "Title": row.get("Title", ""),
-            "Body": row.get("Body", ""),
-            "Combined": row.get("Combined", ""),
-            "NLP_Text": nlp_text,
-            "Model": model,
-            "Processing_Status": status,
-        }
-
-        if result is not None:
-            record.update(result_to_row_dict(result))
-        else:
-            record.update(
-                {
-                    "Drugs": [],
-                    "Diseases": [],
-                    "Study_Names": [],
-                    "Topics": [],
-                    "Topic_Sentiments": [],
-                    "Evidence": [],
-                    "Confidence_Scores": [],
-                }
-            )
-
+        record = _build_result_record(
+            row_dict, result, status, attempt_count, last_error, model
+        )
         completed.append(record)
 
         if request_delay > 0:

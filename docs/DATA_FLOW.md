@@ -8,19 +8,17 @@ This document traces **one record** from raw Excel to final CSV row.
 
 ### Media file (`Media & Research Articles data.xlsx`)
 
-Typical columns (yours may differ — run `inspect_datasets.py`):
+Confirmed columns (50 rows):
 
-| Title | Body |
-|-------|------|
-| "KEYNOTE-189 Trial Shows OS Benefit..." | "The phase 3 KEYNOTE-189 trial demonstrated..." |
+| unique_id | Article title | Content | Source | Source Type | Article link | Published date |
+|-----------|---------------|---------|--------|-------------|--------------|----------------|
 
 ### Twitter file (`Twitter Posts Data.xlsx`)
 
-Typical columns:
+Confirmed columns (50 rows):
 
-| Body |
-|------|
-| "Excited about the new OS data for pembrolizumab!" |
+| unique_id | HCP Handle | Posts | replied_to_tweet | Source | Source Type | Post link | Published date |
+|-----------|------------|-------|------------------|--------|-------------|-----------|----------------|
 
 ---
 
@@ -29,9 +27,11 @@ Typical columns:
 `preprocessing.py` renames columns using maps in `config.py`:
 
 ```
-"Article Title"  →  Title
+"Article title"  →  Title
 "Content"        →  Body
-"Tweet Text"     →  Body
+"Source"         →  Original_Source   (publisher preserved)
+"Posts"          →  Body
+"replied_to_tweet" → replied_to_tweet  (Twitter reply context)
 ```
 
 Missing columns are added as empty (NaN).
@@ -138,7 +138,8 @@ Multi-label topics are stored as parallel lists:
 | Topic_Sentiments | `["positive", "negative"]` |
 | Evidence | `["significant improvement...", "nausea, fatigue..."]` |
 | Confidence_Scores | `[0.92, 0.88]` |
-| Model | `gemini-2.5-flash-lite` |
+| Model_Confidence_Scores | `[0.92, 0.88]` |
+| Model | `gemini-3.5-flash-lite` |
 | Processing_Status | `success` |
 
 ---

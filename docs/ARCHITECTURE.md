@@ -121,7 +121,7 @@ API Request
  Max retries reached? → Log failure, empty result, continue
 ```
 
-Checkpoints saved every 50 records to `outputs/checkpoints/`.
+Checkpoints saved every 10 records to `outputs/checkpoints/`.
 
 ## Module Dependencies
 
