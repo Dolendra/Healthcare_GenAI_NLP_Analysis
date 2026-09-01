@@ -326,3 +326,86 @@ def select_pilot_records(combined_df: pd.DataFrame, n: int = 10) -> pd.DataFrame
         .sort_values("Record_ID")
         .reset_index(drop=True)
     )
+
+
+def select_validation_records(
+    combined_df: pd.DataFrame,
+    n: int = 50,
+    media_n: int = 25,
+    twitter_n: int = 25,
+    random_state: int = 42,
+) -> pd.DataFrame:
+    """
+    Build a stratified validation sample: 25 Media + 25 Twitter.
+
+    Seeds with diverse case types (clinical trial, screening, long article,
+    short tweet, reply-context, safety/efficacy/OS/PFS keywords), then fills
+    remaining slots randomly within each source.
+    """
+    if media_n + twitter_n != n:
+        raise ValueError("media_n + twitter_n must equal n")
+
+    selected_ids: list[int] = []
+
+    def add_ids(record_ids, limit: int = 1) -> None:
+        added = 0
+        for record_id in record_ids:
+            if record_id in selected_ids:
+                continue
+            selected_ids.append(int(record_id))
+            added += 1
+            if added >= limit:
+                break
+
+    text = (
+        combined_df["Title"].fillna("")
+        + " "
+        + combined_df["Body"].fillna("")
+        + " "
+        + combined_df["Combined"].fillna("")
+    ).str.lower()
+
+    # Seed diverse cases
+    add_ids(combined_df.loc[text.str.contains("checkmate-901|checkmate 901", regex=True), "Record_ID"], 2)
+    add_ids(combined_df.loc[text.str.contains("uspstf"), "Record_ID"], 2)
+    add_ids(combined_df.loc[text.str.contains("overall survival|\\bos\\b", regex=True), "Record_ID"], 3)
+    add_ids(combined_df.loc[text.str.contains("progression free survival|\\bpfs\\b", regex=True), "Record_ID"], 3)
+    add_ids(combined_df.loc[text.str.contains("adverse|side effect|toxicity|safety", regex=True), "Record_ID"], 3)
+    add_ids(combined_df[combined_df["Source"] == "Media"].nlargest(2, "Word_Count")["Record_ID"], 2)
+    add_ids(
+        combined_df[(combined_df["Source"] == "Twitter") & (combined_df["Word_Count"] <= 12)]["Record_ID"],
+        3,
+    )
+    add_ids(
+        combined_df[
+            (combined_df["Source"] == "Twitter")
+            & (combined_df["replied_to_tweet"].fillna("").str.len() > 40)
+        ]["Record_ID"],
+        5,
+    )
+
+    for source, target in [("Media", media_n), ("Twitter", twitter_n)]:
+        current = sum(
+            1
+            for rid in selected_ids
+            if combined_df.loc[combined_df["Record_ID"] == rid, "Source"].iloc[0] == source
+        )
+        needed = target - current
+        if needed <= 0:
+            continue
+        pool = combined_df[
+            (combined_df["Source"] == source)
+            & (~combined_df["Record_ID"].isin(selected_ids))
+        ]
+        sample_n = min(needed, len(pool))
+        if sample_n > 0:
+            selected_ids.extend(
+                pool.sample(n=sample_n, random_state=random_state)["Record_ID"].tolist()
+            )
+
+    selected_ids = selected_ids[:n]
+    return (
+        combined_df[combined_df["Record_ID"].isin(selected_ids)]
+        .sort_values("Record_ID")
+        .reset_index(drop=True)
+    )

@@ -119,4 +119,17 @@ Healthcare_GenAI_NLP/
 2. Place Excel files in `data/`
 3. Run `python scripts/inspect_datasets.py`
 4. Set `GEMINI_API_KEY` in `.env`
-5. Open and run the notebook end-to-end
+5. Run preprocessing → pilot → batch:
+   ```bash
+   python scripts/run_preprocessing.py
+   python scripts/run_pilot.py
+   python scripts/run_batch.py
+   ```
+6. Validate and evaluate:
+   ```bash
+   python scripts/quality_check.py
+   python scripts/create_validation_sample.py
+   python scripts/apply_ground_truth.py
+   python scripts/evaluate.py
+   ```
+7. Open and run the notebook for analytics and final presentation

@@ -1,0 +1,453 @@
+{
+  "1": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": ["breast cancer"],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["Others"],
+    "Expected_Sentiments": {"Others": "positive"}
+  },
+  "3": {
+    "Expected_Drugs": ["nivolumab", "gemcitabine", "cisplatin", "avelumab"],
+    "Expected_Diseases": ["urothelial carcinoma", "metastatic urothelial carcinoma"],
+    "Expected_Study_Names": ["CheckMate-901"],
+    "Expected_Topics": ["Overall Survival (OS)", "Progression Free Survival (PFS)", "Efficacy-General"],
+    "Expected_Sentiments": {
+      "Overall Survival (OS)": "positive",
+      "Progression Free Survival (PFS)": "positive",
+      "Efficacy-General": "positive"
+    }
+  },
+  "4": {
+    "Expected_Drugs": ["atezolizumab", "nab-paclitaxel"],
+    "Expected_Diseases": ["triple-negative breast cancer", "TNBC"],
+    "Expected_Study_Names": ["IMpassion132", "IMpassion130"],
+    "Expected_Topics": ["Overall Survival (OS)", "Progression Free Survival (PFS)"],
+    "Expected_Sentiments": {
+      "Overall Survival (OS)": "negative",
+      "Progression Free Survival (PFS)": "neutral"
+    }
+  },
+  "5": {
+    "Expected_Drugs": ["datopotamab deruxtecan", "trastuzumab deruxtecan", "sacituzumab govitecan", "eribulin mesylate", "vinorelbine", "gemcitabine", "capecitabine"],
+    "Expected_Diseases": ["breast cancer", "metastatic breast cancer"],
+    "Expected_Study_Names": ["TROPION-Breast01", "DESTINY-Breast02", "TROPiCS-02", "EVER-132-002"],
+    "Expected_Topics": ["Progression Free Survival (PFS)", "Safety-General", "Safety-Side Effects", "Efficacy-General"],
+    "Expected_Sentiments": {
+      "Progression Free Survival (PFS)": "positive",
+      "Safety-General": "positive",
+      "Safety-Side Effects": "negative",
+      "Efficacy-General": "positive"
+    }
+  },
+  "6": {
+    "Expected_Drugs": ["atezolizumab", "nab-paclitaxel"],
+    "Expected_Diseases": ["triple-negative breast cancer", "TNBC"],
+    "Expected_Study_Names": ["IMpassion132", "IMpassion130"],
+    "Expected_Topics": ["Overall Survival (OS)", "Progression Free Survival (PFS)"],
+    "Expected_Sentiments": {
+      "Overall Survival (OS)": "negative",
+      "Progression Free Survival (PFS)": "neutral"
+    }
+  },
+  "7": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": ["breast cancer"],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["Others"],
+    "Expected_Sentiments": {"Others": "negative"}
+  },
+  "9": {
+    "Expected_Drugs": ["datopotamab deruxtecan", "Dato-DXd"],
+    "Expected_Diseases": ["non-small cell lung cancer", "NSCLC", "brain metastases"],
+    "Expected_Study_Names": ["TROPION-Lung05"],
+    "Expected_Topics": ["Efficacy-General"],
+    "Expected_Sentiments": {"Efficacy-General": "positive"}
+  },
+  "10": {
+    "Expected_Drugs": ["nivolumab", "ipilimumab", "cisplatin", "carboplatin"],
+    "Expected_Diseases": ["non-small cell lung cancer", "NSCLC"],
+    "Expected_Study_Names": ["CheckMate 816"],
+    "Expected_Topics": ["Progression Free Survival (PFS)", "Overall Survival (OS)", "Efficacy-General", "Safety-Side Effects"],
+    "Expected_Sentiments": {
+      "Progression Free Survival (PFS)": "positive",
+      "Overall Survival (OS)": "positive",
+      "Efficacy-General": "positive",
+      "Safety-Side Effects": "negative"
+    }
+  },
+  "11": {
+    "Expected_Drugs": ["capivasertib", "fulvestrant"],
+    "Expected_Diseases": ["breast cancer", "HR-positive HER2-negative breast cancer"],
+    "Expected_Study_Names": ["CAPItello-291"],
+    "Expected_Topics": ["Progression Free Survival (PFS)", "Efficacy-General"],
+    "Expected_Sentiments": {
+      "Progression Free Survival (PFS)": "positive",
+      "Efficacy-General": "positive"
+    }
+  },
+  "12": {
+    "Expected_Drugs": ["abemaciclib", "fulvestrant"],
+    "Expected_Diseases": ["HR-positive HER2-negative breast cancer"],
+    "Expected_Study_Names": ["postMONARCH"],
+    "Expected_Topics": ["Progression Free Survival (PFS)", "Efficacy-General", "Safety-Side Effects"],
+    "Expected_Sentiments": {
+      "Progression Free Survival (PFS)": "positive",
+      "Efficacy-General": "positive",
+      "Safety-Side Effects": "neutral"
+    }
+  },
+  "13": {
+    "Expected_Drugs": ["nivolumab", "cisplatin", "gemcitabine"],
+    "Expected_Diseases": ["urothelial carcinoma", "bladder cancer"],
+    "Expected_Study_Names": ["CheckMate 901"],
+    "Expected_Topics": ["Overall Survival (OS)", "Progression Free Survival (PFS)", "Efficacy-General", "Safety-Side Effects"],
+    "Expected_Sentiments": {
+      "Overall Survival (OS)": "positive",
+      "Progression Free Survival (PFS)": "positive",
+      "Efficacy-General": "positive",
+      "Safety-Side Effects": "negative"
+    }
+  },
+  "14": {
+    "Expected_Drugs": ["nivolumab", "cabozantinib"],
+    "Expected_Diseases": ["non-clear cell renal cell carcinoma", "RCC"],
+    "Expected_Study_Names": ["NCT03635892"],
+    "Expected_Topics": ["Efficacy-General", "Progression Free Survival (PFS)", "Overall Survival (OS)", "Safety-Side Effects"],
+    "Expected_Sentiments": {
+      "Efficacy-General": "positive",
+      "Progression Free Survival (PFS)": "positive",
+      "Overall Survival (OS)": "positive",
+      "Safety-Side Effects": "negative"
+    }
+  },
+  "21": {
+    "Expected_Drugs": ["cretostimogene grenadenorepvec", "pembrolizumab"],
+    "Expected_Diseases": ["non-muscle-invasive bladder cancer", "carcinoma in situ"],
+    "Expected_Study_Names": ["BOND-003"],
+    "Expected_Topics": ["Efficacy-General", "Safety-General", "Safety-Side Effects"],
+    "Expected_Sentiments": {
+      "Efficacy-General": "positive",
+      "Safety-General": "positive",
+      "Safety-Side Effects": "neutral"
+    }
+  },
+  "22": {
+    "Expected_Drugs": ["osimertinib", "durvalumab"],
+    "Expected_Diseases": ["non-small cell lung cancer", "NSCLC"],
+    "Expected_Study_Names": ["LAURA", "PACIFIC"],
+    "Expected_Topics": ["Progression Free Survival (PFS)", "Efficacy-General", "Safety-Side Effects"],
+    "Expected_Sentiments": {
+      "Progression Free Survival (PFS)": "positive",
+      "Efficacy-General": "positive",
+      "Safety-Side Effects": "negative"
+    }
+  },
+  "25": {
+    "Expected_Drugs": ["gemcitabine", "TAR-200"],
+    "Expected_Diseases": ["non-muscle-invasive bladder cancer", "intermediate-risk NMIBC"],
+    "Expected_Study_Names": ["NCT02720367"],
+    "Expected_Topics": ["Safety-General", "Safety-Side Effects", "Efficacy-General"],
+    "Expected_Sentiments": {
+      "Safety-General": "positive",
+      "Safety-Side Effects": "neutral",
+      "Efficacy-General": "positive"
+    }
+  },
+  "26": {
+    "Expected_Drugs": ["pembrolizumab"],
+    "Expected_Diseases": ["upper tract urothelial carcinoma", "UTUC"],
+    "Expected_Study_Names": ["ARON-2"],
+    "Expected_Topics": ["Overall Survival (OS)", "Progression Free Survival (PFS)", "Efficacy-General"],
+    "Expected_Sentiments": {
+      "Overall Survival (OS)": "neutral",
+      "Progression Free Survival (PFS)": "neutral",
+      "Efficacy-General": "positive"
+    }
+  },
+  "27": {
+    "Expected_Drugs": ["pembrolizumab", "Adstiladrin", "Anktiva", "nadofaragene", "gemcitabine", "docetaxel", "cretostimogene"],
+    "Expected_Diseases": ["bladder cancer", "BCG-unresponsive bladder cancer"],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["Efficacy-General", "General Opinion", "Others"],
+    "Expected_Sentiments": {
+      "Efficacy-General": "positive",
+      "General Opinion": "positive",
+      "Others": "neutral"
+    }
+  },
+  "28": {
+    "Expected_Drugs": ["cisplatin", "pembrolizumab"],
+    "Expected_Diseases": ["bladder cancer", "muscle invasive bladder cancer"],
+    "Expected_Study_Names": ["SWOG 1011", "LEA trial"],
+    "Expected_Topics": ["Efficacy-General", "Overall Survival (OS)", "Safety-General"],
+    "Expected_Sentiments": {
+      "Efficacy-General": "neutral",
+      "Overall Survival (OS)": "neutral",
+      "Safety-General": "negative"
+    }
+  },
+  "31": {
+    "Expected_Drugs": ["avelumab"],
+    "Expected_Diseases": ["urothelial carcinoma", "bladder cancer"],
+    "Expected_Study_Names": ["JAVELIN Bladder 100"],
+    "Expected_Topics": ["Overall Survival (OS)", "Progression Free Survival (PFS)", "Safety-General"],
+    "Expected_Sentiments": {
+      "Overall Survival (OS)": "positive",
+      "Progression Free Survival (PFS)": "positive",
+      "Safety-General": "positive"
+    }
+  },
+  "32": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": ["breast cancer", "prostate cancer"],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["Others"],
+    "Expected_Sentiments": {"Others": "neutral"}
+  },
+  "36": {
+    "Expected_Drugs": ["methotrexate", "vinblastine", "doxorubicin", "cisplatin"],
+    "Expected_Diseases": ["bladder cancer", "urothelial carcinoma"],
+    "Expected_Study_Names": ["NCT01611662", "pT0 trial"],
+    "Expected_Topics": ["Efficacy-General", "Others"],
+    "Expected_Sentiments": {
+      "Efficacy-General": "positive",
+      "Others": "positive"
+    }
+  },
+  "41": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": ["cancer"],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["Others"],
+    "Expected_Sentiments": {"Others": "neutral"}
+  },
+  "45": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": ["cancer"],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["Others"],
+    "Expected_Sentiments": {"Others": "neutral"}
+  },
+  "46": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": ["non-small cell lung cancer", "NSCLC"],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["Progression Free Survival (PFS)"],
+    "Expected_Sentiments": {"Progression Free Survival (PFS)": "positive"}
+  },
+  "50": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": [],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["Others"],
+    "Expected_Sentiments": {"Others": "positive"}
+  },
+  "51": {
+    "Expected_Drugs": ["enfortuzumab vedotin", "pembrolizumab"],
+    "Expected_Diseases": ["bladder cancer", "metastatic bladder cancer"],
+    "Expected_Study_Names": ["EV-302"],
+    "Expected_Topics": ["Efficacy-General"],
+    "Expected_Sentiments": {"Efficacy-General": "positive"}
+  },
+  "52": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": [],
+    "Expected_Study_Names": ["SURae-01", "SURE01"],
+    "Expected_Topics": ["General Opinion"],
+    "Expected_Sentiments": {"General Opinion": "positive"}
+  },
+  "53": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": [],
+    "Expected_Study_Names": ["EV-302"],
+    "Expected_Topics": ["General Opinion"],
+    "Expected_Sentiments": {"General Opinion": "positive"}
+  },
+  "54": {
+    "Expected_Drugs": ["fulvestrant", "abemaciclib", "palbociclib"],
+    "Expected_Diseases": [],
+    "Expected_Study_Names": ["postMONARCH"],
+    "Expected_Topics": ["Progression Free Survival (PFS)", "Efficacy-General", "General Opinion"],
+    "Expected_Sentiments": {
+      "Progression Free Survival (PFS)": "positive",
+      "Efficacy-General": "positive",
+      "General Opinion": "neutral"
+    }
+  },
+  "55": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": [],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["General Opinion", "Safety-General"],
+    "Expected_Sentiments": {
+      "General Opinion": "positive",
+      "Safety-General": "neutral"
+    }
+  },
+  "57": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": ["breast cancer"],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["General Opinion"],
+    "Expected_Sentiments": {"General Opinion": "positive"}
+  },
+  "61": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": ["muscle invasive bladder cancer"],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["General Opinion"],
+    "Expected_Sentiments": {"General Opinion": "positive"}
+  },
+  "62": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": ["lung cancer"],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["General Opinion"],
+    "Expected_Sentiments": {"General Opinion": "positive"}
+  },
+  "63": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": ["HER2-negative breast cancer", "HER2-positive breast cancer"],
+    "Expected_Study_Names": ["ABC trials"],
+    "Expected_Topics": ["Others", "General Opinion"],
+    "Expected_Sentiments": {
+      "Others": "neutral",
+      "General Opinion": "neutral"
+    }
+  },
+  "65": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": ["breast cancer"],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["General Opinion"],
+    "Expected_Sentiments": {"General Opinion": "positive"}
+  },
+  "67": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": ["renal cell carcinoma", "RCC"],
+    "Expected_Study_Names": ["EV-302"],
+    "Expected_Topics": ["Others"],
+    "Expected_Sentiments": {"Others": "neutral"}
+  },
+  "68": {
+    "Expected_Drugs": ["olomorasib", "pembrolizumab"],
+    "Expected_Diseases": [],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["Efficacy-General", "Safety-General"],
+    "Expected_Sentiments": {
+      "Efficacy-General": "positive",
+      "Safety-General": "positive"
+    }
+  },
+  "71": {
+    "Expected_Drugs": ["sacituzumab govitecan"],
+    "Expected_Diseases": [],
+    "Expected_Study_Names": ["EVOKE-01"],
+    "Expected_Topics": ["Efficacy-General", "General Opinion"],
+    "Expected_Sentiments": {
+      "Efficacy-General": "negative",
+      "General Opinion": "negative"
+    }
+  },
+  "72": {
+    "Expected_Drugs": ["gemcitabine", "docetaxel"],
+    "Expected_Diseases": ["nonmuscle-invasive urothelial carcinoma", "bladder cancer"],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["General Opinion"],
+    "Expected_Sentiments": {"General Opinion": "positive"}
+  },
+  "74": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": ["lung cancer"],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["General Opinion"],
+    "Expected_Sentiments": {"General Opinion": "neutral"}
+  },
+  "75": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": ["locally advanced NSCLC", "NSCLC"],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["General Opinion"],
+    "Expected_Sentiments": {"General Opinion": "positive"}
+  },
+  "76": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": ["lung cancer"],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["General Opinion"],
+    "Expected_Sentiments": {"General Opinion": "positive"}
+  },
+  "78": {
+    "Expected_Drugs": ["trastuzumab deruxtecan", "T-DXd"],
+    "Expected_Diseases": ["interstitial lung disease", "pneumonitis"],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["Safety-General", "Safety-Side Effects"],
+    "Expected_Sentiments": {
+      "Safety-General": "negative",
+      "Safety-Side Effects": "negative"
+    }
+  },
+  "84": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": ["breast cancer"],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["General Opinion"],
+    "Expected_Sentiments": {"General Opinion": "positive"}
+  },
+  "85": {
+    "Expected_Drugs": ["sacituzumab govitecan"],
+    "Expected_Diseases": [],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["Efficacy-General", "Others"],
+    "Expected_Sentiments": {
+      "Efficacy-General": "neutral",
+      "Others": "neutral"
+    }
+  },
+  "86": {
+    "Expected_Drugs": ["gemcitabine", "erlotinib", "capecitabine"],
+    "Expected_Diseases": ["pancreatic ductal adenocarcinoma", "PDAC"],
+    "Expected_Study_Names": ["RTOG 0848"],
+    "Expected_Topics": ["Progression Free Survival (PFS)", "Overall Survival (OS)", "Efficacy-General", "General Opinion"],
+    "Expected_Sentiments": {
+      "Progression Free Survival (PFS)": "positive",
+      "Overall Survival (OS)": "positive",
+      "Efficacy-General": "neutral",
+      "General Opinion": "neutral"
+    }
+  },
+  "88": {
+    "Expected_Drugs": ["nivolumab", "enfortuzumab vedotin", "pembrolizumab"],
+    "Expected_Diseases": ["urothelial carcinoma"],
+    "Expected_Study_Names": ["CM-301", "EV-302"],
+    "Expected_Topics": ["Progression Free Survival (PFS)", "Efficacy-General"],
+    "Expected_Sentiments": {
+      "Progression Free Survival (PFS)": "positive",
+      "Efficacy-General": "positive"
+    }
+  },
+  "89": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": [],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["General Opinion"],
+    "Expected_Sentiments": {"General Opinion": "positive"}
+  },
+  "92": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": [],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["General Opinion"],
+    "Expected_Sentiments": {"General Opinion": "positive"}
+  },
+  "98": {
+    "Expected_Drugs": [],
+    "Expected_Diseases": ["breast cancer"],
+    "Expected_Study_Names": [],
+    "Expected_Topics": ["Safety-Side Effects", "Others"],
+    "Expected_Sentiments": {
+      "Safety-Side Effects": "negative",
+      "Others": "negative"
+    }
+  }
+}
