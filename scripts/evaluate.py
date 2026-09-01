@@ -3,7 +3,7 @@
 Evaluate Gemini predictions against manual_validation.csv ground truth.
 
 Fill Expected_* columns in outputs/manual_validation.csv before running.
-Do NOT edit predictions_NDST.csv — compare raw Gemini output to human labels.
+Do NOT edit the predictions CSV — compare raw Gemini output to human labels.
 """
 
 from __future__ import annotations

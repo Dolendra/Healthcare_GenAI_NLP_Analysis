@@ -152,7 +152,7 @@ Lists converted to JSON strings for clean CSV:
 results_df["Drugs"] = results_df["Drugs"].apply(json.dumps)
 ```
 
-Output: `outputs/predictions_NDST.csv`
+Output: `outputs/predictions_B210212.csv`
 
 ---
 

@@ -2,12 +2,16 @@
 """Generate the submission Jupyter notebook with all 28 sections."""
 
 import json
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from src.config import STUDENT_ID
 
 NOTEBOOK_PATH = (
     Path(__file__).resolve().parent.parent
     / "notebooks"
-    / "Healthcare_GenAI_NLP_Analysis_NDST.ipynb"
+    / f"Healthcare_GenAI_NLP_Analysis_{STUDENT_ID}.ipynb"
 )
 
 

@@ -9,7 +9,7 @@ OUTPUT_DIR = PROJECT_ROOT / "outputs"
 NOTEBOOKS_DIR = PROJECT_ROOT / "notebooks"
 
 # ── Student / submission ID ────────────────────────────────────────────────
-STUDENT_ID = "NDST"
+STUDENT_ID = "B210212"
 
 # ── Input filenames (exact names required by assignment) ───────────────────
 MEDIA_FILE = DATA_DIR / "Media & Research Articles data.xlsx"

@@ -13,13 +13,7 @@ if hasattr(sys.stdout, "reconfigure"):
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.config import (
-    EXPECTED_COMBINED_ROWS,
-    EXPECTED_MEDIA_ROWS,
-    EXPECTED_TWITTER_ROWS,
-    PREDICTIONS_FILE,
-    STUDENT_ID,
-)
+from src.config import PREDICTIONS_FILE, STUDENT_ID, EXPECTED_COMBINED_ROWS, EXPECTED_MEDIA_ROWS, EXPECTED_TWITTER_ROWS
 
 REQUIRED_SCRIPTS = [
     "quality_check.py",
@@ -40,7 +34,7 @@ REQUIRED_SOURCE = [
 
 GITIGNORED_SENSITIVE = [".env"]
 GITIGNORED_OUTPUTS = [
-    "outputs/predictions_NDST.csv",
+    str(PREDICTIONS_FILE.relative_to(PROJECT_ROOT)),
     "outputs/checkpoints",
 ]
 

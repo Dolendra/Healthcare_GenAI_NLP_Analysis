@@ -1,6 +1,6 @@
 # Notebook Walkthrough
 
-File: `notebooks/Healthcare_GenAI_NLP_Analysis_NDST.ipynb`
+File: `notebooks/Healthcare_GenAI_NLP_Analysis_B210212.ipynb`
 
 Each section maps to a notebook heading. Run cells **in order**.
 

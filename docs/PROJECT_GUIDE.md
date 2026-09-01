@@ -37,10 +37,10 @@ Healthcare_GenAI_NLP/
 │   └── Twitter Posts Data.xlsx
 │
 ├── 📓 notebooks/
-│   └── Healthcare_GenAI_NLP_Analysis_NDST.ipynb   ← Main submission notebook
+│   └── Healthcare_GenAI_NLP_Analysis_B210212.ipynb   ← Main submission notebook
 │
 ├── 📤 outputs/
-│   ├── predictions_NDST.csv          ← Final deliverable
+│   ├── predictions_B210212.csv          ← Final deliverable
 │   └── checkpoints/                  ← Resume-safe API progress
 │
 ├── 🔧 src/                           ← Reusable Python modules
@@ -109,7 +109,7 @@ Get a free key at: https://aistudio.google.com/apikey
 ### Step 5 — Run the notebook
 
 ```bash
-jupyter notebook notebooks/Healthcare_GenAI_NLP_Analysis_NDST.ipynb
+jupyter notebook notebooks/Healthcare_GenAI_NLP_Analysis_B210212.ipynb
 ```
 
 Run all cells top-to-bottom. The notebook will:
@@ -125,7 +125,7 @@ Run all cells top-to-bottom. The notebook will:
 Edit **one line** in `src/config.py`:
 
 ```python
-STUDENT_ID = "NDST"   # ← change to your ID
+STUDENT_ID = "B210212"   # ← change to your ID
 ```
 
 This updates the output filename to `predictions_YOUR_ID.csv`.

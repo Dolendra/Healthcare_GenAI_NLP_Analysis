@@ -13,7 +13,7 @@ Analyze healthcare-related **media articles** and **Twitter posts** using Google
 pip install -r requirements.txt
 copy .env.example .env          # add GEMINI_API_KEY
 python scripts/generate_sample_data.py   # if you don't have real Excel files yet
-jupyter notebook notebooks/Healthcare_GenAI_NLP_Analysis_NDST.ipynb
+jupyter notebook notebooks/Healthcare_GenAI_NLP_Analysis_B210212.ipynb
 ```
 
 **Full documentation:** [docs/PROJECT_GUIDE.md](docs/PROJECT_GUIDE.md)
@@ -77,7 +77,7 @@ Topic-level sentiment (positive / negative / neutral) with evidence snippets and
 ## Output
 
 ```
-outputs/predictions_NDST.csv
+outputs/predictions_B210212.csv
 ```
 
 Change `STUDENT_ID` in `src/config.py` to match your assignment ID.
@@ -139,8 +139,8 @@ Healthcare_GenAI_NLP/
 
 | Deliverable | Location |
 |-------------|----------|
-| Jupyter notebook | `notebooks/Healthcare_GenAI_NLP_Analysis_NDST.ipynb` |
-| Predictions CSV | `outputs/predictions_NDST.csv` (submit separately if required; gitignored) |
+| Jupyter notebook | `notebooks/Healthcare_GenAI_NLP_Analysis_B210212.ipynb` |
+| Predictions CSV | `outputs/predictions_B210212.csv` (submit separately if required; gitignored) |
 | Reproducible scripts | `scripts/` |
 | Documentation | `docs/` + `README.md` |
 

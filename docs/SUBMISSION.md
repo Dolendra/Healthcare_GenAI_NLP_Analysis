@@ -32,23 +32,23 @@ python scripts/analyze_results.py    # writes analytics_report.txt + charts
 
 ## 4. Notebook
 
-Open `notebooks/Healthcare_GenAI_NLP_Analysis_NDST.ipynb` and **Restart Kernel → Run All**.
+Open `notebooks/Healthcare_GenAI_NLP_Analysis_B210212.ipynb` and **Restart Kernel → Run All**.
 
-When `outputs/predictions_NDST.csv` exists, the notebook runs in **analysis mode** (no API calls for pilot/batch).
+When `outputs/predictions_B210212.csv` exists, the notebook runs in **analysis mode** (no API calls for pilot/batch).
 
 ## 5. Files to submit
 
 | File | Notes |
 |------|-------|
-| `notebooks/Healthcare_GenAI_NLP_Analysis_NDST.ipynb` | Main deliverable |
-| `outputs/predictions_NDST.csv` | Required output CSV (100 rows × 21 columns) |
+| `notebooks/Healthcare_GenAI_NLP_Analysis_B210212.ipynb` | Main deliverable |
+| `outputs/predictions_B210212.csv` | Required output CSV (100 rows × 21 columns) |
 | GitHub repo link | Optional but recommended |
 
 ## 6. Files that must NOT be committed
 
 ```
 .env
-outputs/predictions_NDST.csv      # gitignored — submit separately
+outputs/predictions_B210212.csv      # gitignored — submit separately
 outputs/pilot_results.csv
 outputs/checkpoints/
 outputs/*.txt
@@ -74,7 +74,7 @@ outputs/charts/
 
 ## 9. Error analysis — do NOT edit predictions
 
-Keep `predictions_NDST.csv` as raw Gemini output. Use Record 27 (`EV-302`, `TAR-200` hallucination) as an error-analysis example in the notebook.
+Keep `predictions_B210212.csv` as raw Gemini output. Use Record 27 (`EV-302`, `TAR-200` hallucination) as an error-analysis example in the notebook.
 
 ## 10. Final sign-off
 
@@ -84,4 +84,4 @@ Keep `predictions_NDST.csv` as raw Gemini output. Use Record 27 (`EV-302`, `TAR-
 - [ ] Notebook runs top-to-bottom in analysis mode
 - [ ] README wording matches validation approach
 - [ ] `.env` not in git
-- [ ] `predictions_NDST.csv` ready for separate upload
+- [ ] `predictions_B210212.csv` ready for separate upload

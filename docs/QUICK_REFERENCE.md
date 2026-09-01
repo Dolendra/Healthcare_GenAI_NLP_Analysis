@@ -11,7 +11,7 @@ docs/PROJECT_GUIDE.md
 ```powershell
 cd D:\Assignment1\Healthcare_GenAI_NLP
 .venv\Scripts\Activate.ps1
-jupyter notebook notebooks/Healthcare_GenAI_NLP_Analysis_NDST.ipynb
+jupyter notebook notebooks/Healthcare_GenAI_NLP_Analysis_B210212.ipynb
 ```
 
 ### Before First Run
@@ -23,8 +23,8 @@ jupyter notebook notebooks/Healthcare_GenAI_NLP_Analysis_NDST.ipynb
 ### Key Files
 | What | Where |
 |------|-------|
-| Main notebook | `notebooks/Healthcare_GenAI_NLP_Analysis_NDST.ipynb` |
-| Output CSV | `outputs/predictions_NDST.csv` |
+| Main notebook | `notebooks/Healthcare_GenAI_NLP_Analysis_B210212.ipynb` |
+| Output CSV | `outputs/predictions_B210212.csv` |
 | API client | `src/gemini_client.py` |
 | Prompts | `src/prompts.py` |
 | Topics list | `src/config.py` → `TOPICS` |
